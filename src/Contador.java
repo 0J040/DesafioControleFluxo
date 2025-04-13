@@ -1,5 +1,6 @@
 import java.util.Scanner;
 
+import exceptions.ParametrosInvalidosException;
 
 public class Contador {
 	public static void main(String[] args) {
@@ -11,20 +12,28 @@ public class Contador {
 		
         System.out.println(" Digite o segundo parâmetro ");
 		int parametroDois = terminal.nextInt();
-		/*
+
+        terminal.close();
+		
 		try {
 			//chamando o método contendo a lógica de contagem
 			contar(parametroUm, parametroDois); 
-		}catch (? exception) {
-            System.err.println(" O segundo parâmetro deve ser maior que o primeiro "); 
-			//imprimir a mensagem: O segundo parâmetro deve ser maior que o primeiro
-		} */
+		} catch (ParametrosInvalidosException exception) {
+            System.err.println(exception.getMessage()); 
+		} 
 		
 	}
-	static void contar(int parametroUm, int parametroDois ) throws ParametrosInvalidosException {
-		//validar se parametroUm é MAIOR que parametroDois e lançar a excreção 
-		
-		int contagem = parametroDois - parametroUm;
-		//realizar o for para imprimir os números com base na variável contagem
+	public static void contar(int parametroUm, int parametroDois) throws ParametrosInvalidosException {
+	    // Validar se parametroUm é maior que parametroDois
+	    if (parametroUm > parametroDois) {
+	        throw new ParametrosInvalidosException(" O segundo parâmetro deve ser maior que o primeiro. ");
+	    }
+
+	    int contagem = parametroDois - parametroUm;
+
+	    // Realizar o for para imprimir os números com base na variável contagem
+	    for (int dedodaMao = 1; dedodaMao <= contagem; dedodaMao++) {
+	        System.out.println(" Imprimindo o Número: " + dedodaMao);
+	    }
 	}
 }
